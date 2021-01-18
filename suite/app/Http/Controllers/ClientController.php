@@ -80,12 +80,22 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param Request $request
+     * @param \App\Client $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(Request $request, Client $client)
     {
-//        return response()->json($client);
+        try
+        {
+            $client = Client::findOrFail($request['id']);
+
+            return view('clients.show', compact('client'));
+        }
+        catch (\Exception $ex)
+        {
+            // do something
+        }
     }
 
     /**

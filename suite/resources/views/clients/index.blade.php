@@ -40,6 +40,7 @@
                         <td><a href="{{ route('transactions.index', $client->id)}}" title="Transactions">{{ $client->transactions->count()  }}</a></td>
                         <td>
                             <div class="clearfix">
+                                <a href="{{ route('clients.show', $client->id)}}" title="Edit" class="btn btn-link float-left"><i class="bi bi-eye"></i></a>
                                 <a href="{{ route('clients.edit', $client->id)}}" title="Edit" class="btn btn-link float-left"><i class="bi bi-pencil-square"></i></a>
                                 <form action="{{ route('clients.destroy', $client->id)}}" method="post">
                                     @csrf

@@ -32,6 +32,7 @@
                             <td>{{ $transaction->created_at }}</td>
                             <td>{{ number_format($transaction->amount, 2) }}</td>
                             <td><div class="clearfix">
+                                    <a href="{{ route('transactions.show', $transaction->id)}}" title="Edit" class="btn btn-link float-left"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('transactions.edit', $transaction->id)}}" title="Edit" class="btn btn-link float-left"><i class="bi bi-pencil-square"></i></a>
                                     <form action="{{ route('transactions.destroy', $transaction->id)}}" method="post">
                                         @csrf

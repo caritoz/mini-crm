@@ -90,12 +90,22 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param Request $request
+     * @param \App\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(Request $request, Transaction $transaction)
     {
-        //
+        try
+        {
+            $transaction = Transaction::findOrFail($request['id']);
+
+            return view('transactions.show', compact('transaction'));
+        }
+        catch (\Exception $ex)
+        {
+            // do something
+        }
     }
 
     /**
