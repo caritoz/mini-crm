@@ -1,0 +1,93 @@
+version: '3'
+services:
+  ## WEB SERVER
+  web:
+    build: docker-compose/nginx
+    env_file:
+      - .dockerenv
+    environment:
+      DOCKER_SERVICE_NAME: api # PHP service
+      DOCKER_SERVICE_PORT: 9000
+    entrypoint: /usr/bin/nginx-entrypoint.sh # SH for nginx conf
+    ports:
+      - "5080:80"
+    volumes:
+      - ./suite:/var/www/html/suite
+      - ./suite/storage:/var/www/html/suite/storage
+    depends_on:
+      - api
+    networks:
+      - laravelnet
+  ## BACKEND SERVER
+  api:
+    build: docker-compose/php
+    env_file:
+      - .dockerenv
+    volumes:
+      - ./suite:/var/www/html/suite
+      - ./suite/storage:/var/www/html/suite/storage
+    entrypoint: /usr/local/bin/entrypoint.sh # SH for laravel conf
+#    command: "/usr/local/bin/artisan.sh"
+    depends_on:
+      - db
+#      - cache
+    networks:
+      - laravelnet
+#  app-ui:
+#    build: docker-compose/node
+#    volumes:
+#      - ./frontend:/var/www/html
+#    networks:
+#      - laravelnet
+  ## CACHE SERVER
+#  cache:
+#    image: redis:alpine
+#    ports:
+#      - "5079:6379"
+#    networks:
+#    - laravelnet
+  ## DATABASE SERVER
+  db:
+    build: docker-compose/database
+    ports:
+      - "5032:5432"
+    environment:
+      POSTGRES_DB: suite
+      POSTGRES_USER: suite
+      POSTGRES_PASSWORD: suite
+    restart: unless-stopped
+    volumes:
+#      - ./docker-compose/pgdata:/var/lib/postgresql/data
+      - /var/lib/postgresql/data
+    networks:
+      - laravelnet
+  ## MANAGER DATABASE SERVER
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+    - db
+    ports:
+    - "5055:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: suite
+      PGADMIN_DEFAULT_PASSWORD: suite
+    restart: unless-stopped
+    networks:
+    - laravelnet
+  ## MAIL SERVER
+#  mail:
+#    image: mailhog/mailhog:latest
+#    ports:
+#     - "5025:8025"
+#    networks:
+#     - laravelnet
+#volumes:
+#  pgdata:
+#Docker Networks
+networks:
+  laravelnet:
+    external: true
+#Docker Volumes
+volumes:
+  pgdata:
+    driver: "local"

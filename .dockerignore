@@ -1,0 +1,13 @@
+.git
+.idea
+
+docker-compose/
+suite/.env
+suite/node_modules/
+suite/vendor/
+suite/storage/
+
+suite/public/css/**
+suite/public/js/**
+
+**Thumbs.db
