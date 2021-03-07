@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Http\Requests\ClientFormRequest;
-use App\Http\Requests\ClientRequest;
 use App\Http\Requests\ClientUpdateFormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ClientController extends Controller
 {
+    const resultsPerPage = 5;
     /**
      * @var Client
      */
@@ -21,38 +22,26 @@ class ClientController extends Controller
      */
     public function __construct(Client $client)
     {
-        $this->middleware('auth');
-
         $this->client = $client;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
      */
     public function index()
     {
-        $clients = $this->client->orderBy('updated_at', 'desc')->paginate(10);
+        $clients = $this->client->orderBy('updated_at', 'desc')->paginate(self::resultsPerPage);
 
-        return view('clients.index', compact('clients'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('clients.create');
+        return response($clients->jsonSerialize(), Response::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param ClientFormRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(ClientFormRequest $request)
     {
@@ -65,36 +54,18 @@ class ClientController extends Controller
                 'email'
             ]));
 
-            $client->avatar = $this->uploadImage($request);
+            if ($request->hasFile('avatar'))
+            {
+                $client->avatar = $this->uploadImage($request);
+            }
+
             $client->save();
 
-//        return response()->json($client);
-            return redirect('/clients')->with('success', 'Client add!');
+            return response()->json($client, Response::HTTP_CREATED);
         }
         catch (\Exception $ex)
         {
-            // do something
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param Request $request
-     * @param \App\Client $client
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, Client $client)
-    {
-        try
-        {
-            $client = Client::findOrFail($request['id']);
-
-            return view('clients.show', compact('client'));
-        }
-        catch (\Exception $ex)
-        {
-            // do something
+            return response()->json(['message' => $ex->getMessage()], Response::HTTP_EXPECTATION_FAILED);
         }
     }
 
@@ -103,7 +74,7 @@ class ClientController extends Controller
      *
      * @param Request $request
      * @param \App\Client $client
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function edit(Request $request, Client $client)
     {
@@ -111,11 +82,11 @@ class ClientController extends Controller
         {
             $client = Client::findOrFail($request['id']);
 
-            return view('clients.edit', compact('client'));
+            return response()->json($client, Response::HTTP_OK);
         }
         catch (\Exception $ex)
         {
-
+            return response()->json(['message' => $ex->getMessage()], Response::HTTP_EXPECTATION_FAILED);
         }
     }
 
@@ -124,7 +95,7 @@ class ClientController extends Controller
      *
      * @param ClientUpdateFormRequest $request
      * @param \App\Client $client
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(ClientUpdateFormRequest $request, Client $client)
     {
@@ -142,11 +113,11 @@ class ClientController extends Controller
                 $client->save();
             }
 
-            return redirect('/clients')->with('success', 'Client updated!');
+            return response()->json($client, Response::HTTP_CREATED);
         }
         catch (\Exception $ex)
         {
-            // do something
+            return response()->json(['message' => $ex->getMessage()], Response::HTTP_EXPECTATION_FAILED);
         }
     }
 
@@ -154,7 +125,7 @@ class ClientController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Client $client)
     {
@@ -164,18 +135,20 @@ class ClientController extends Controller
 
             if( count($client->transactions) > 0 )
             {
-                return redirect('/clients')->with('errors', 'The Client could be not deleted. It contains transactions.');
+                return response()->json([
+                    'message' => 'The Client could be not deleted. It contains transactions.'],
+                    Response::HTTP_EXPECTATION_FAILED);
             }
             else
             {
                 Client::destroy($client->id);
-
-                return redirect('/clients')->with('success', 'Client deleted!');
+                return response()->json($client, Response::HTTP_OK);
             }
         }
         catch (\Exception $ex)
         {
             // do something
+            return response()->json(['message' => $ex->getMessage()], Response::HTTP_EXPECTATION_FAILED);
         }
     }
 
@@ -194,7 +167,7 @@ class ClientController extends Controller
         }
         catch (\Exception $ex)
         {
-            //do something
+            return response()->json(['message' => $ex->getMessage()], Response::HTTP_EXPECTATION_FAILED);
         }
     }
 }

@@ -11,8 +11,8 @@ class ClientUpdateFormRequest extends ClientFormRequest
      */
     public function rules()
     {
-        $rules = parent::rules();
-        $rules['avatar'] = 'nullable|mimes:jpg,jpeg,png,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=100,max_height=100';
+        $rules              = parent::rules();
+        $rules['avatar']    = 'nullable|mimes:jpg,jpeg,png,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=100,max_height=100';
 
         return $rules;
     }

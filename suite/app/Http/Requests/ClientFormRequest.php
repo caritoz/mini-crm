@@ -24,10 +24,9 @@ class ClientFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'required|max:255',
+            'first_name'    => 'required|string|max:255',
             'last_name'     => 'required|max:255',
             'email'         => 'required|email:rfc',
-            'avatar'        => 'required|mimes:jpg,jpeg,png,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=100,max_height=100',
         ];
     }
 

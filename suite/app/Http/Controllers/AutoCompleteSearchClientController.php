@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class AutoCompleteSearchClientController extends Controller
 {
+    const perResult = 10;
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -17,20 +18,23 @@ class AutoCompleteSearchClientController extends Controller
 
         if($search == '')
         {
-            $clients = Client::orderby('first_name','asc')->select('id', 'first_name', 'last_name')->limit(5)->get();
+            $clients = Client::orderby('first_name','asc')->select('*')
+                ->limit(self::perResult)
+                ->get();
         }
         else
         {
-            $clients = Client::orderby('first_name','asc')->select('id','first_name', 'last_name')
+            $clients = Client::orderby('first_name','asc')->select('*')
                 ->where('first_name', 'ilike', '%' .$search . '%')
                 ->orWhere('last_name', 'ilike', '%' .$search . '%')
-                ->limit(5)->get();
+                ->limit(self::perResult)
+                ->get();
         }
 
         $response = array();
         foreach($clients as $client)
         {
-            $response[] = ['value' => $client->id, 'label' => $client->first_name .' '. $client->last_name ];
+            $response[] = ['value' => $client->id, 'label' => $client->full_name ];
         }
 
         return response()->json($response);

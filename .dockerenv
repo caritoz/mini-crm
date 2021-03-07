@@ -4,7 +4,7 @@ DOCKER_PHP_SERVICE_PORT=9000
 DOCKER_DATABASE_SERVICE=database
 DOCKER_NGINX_ROOT_PUBLIC=/var/www/html/suite/public
 
-SERVER_NAME=na-matho-platform-api.local
+SERVER_NAME=min-crm.local
 DOCUMENT_ROOT=/var/www/html/suite/public
 CERTIFICATE_CRT=/etc/ssl/certs/server.crt
 CERTIFICATE_KEY=/etc/ssl/certs/server.key
@@ -66,6 +66,5 @@ MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
 # where your frontend lives
-SANCTUM_STATEFUL_DOMAINS=localhost,127.0.0.1,127.0.0.1:8080,::1,.min-crm.local
 
 SESSION_DOMAIN=.min-crm.local

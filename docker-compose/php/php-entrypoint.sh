@@ -56,7 +56,7 @@ MIX_PUSHER_APP_CLUSTER=${MIX_PUSHER_APP_CLUSTER}
 # where your frontend lives
 SANCTUM_STATEFUL_DOMAINS=localhost,127.0.0.1,127.0.0.1:8000,::1
 
-SESSION_DOMAIN=.na-matho-platform-api.local
+SESSION_DOMAIN=.min-crm.local
 
 EOF
 
