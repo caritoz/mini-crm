@@ -70,7 +70,9 @@
     </style>
 </head>
 <body>
-<div id="app"><app-component></app-component></div>
+<div id="app">
+    <app-component></app-component>
+</div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
