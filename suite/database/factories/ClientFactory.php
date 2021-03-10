@@ -9,7 +9,7 @@ $factory->define(Client::class, function (Faker $faker) {
     return [
         'first_name'    => $faker->firstName,
         'last_name'     => $faker->lastName,
-        'avatar'        => $faker->imageUrl(),
         'email'         => $faker->unique()->safeEmail,
+        'avatar'        => $faker->imageUrl(),
     ];
 });

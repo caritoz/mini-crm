@@ -53,13 +53,21 @@ $ composer update
     ## Install migrations and seeds
     $ php artisan migrate --seed
 
+    ## create the encryption keys needed to generate secure access tokens
+    $ php artisan passport:install
+
     ## symbolic link by Images
     $ php artisan storage:link
   
 ```
 ### PHPUnit tests in Laravel
 ````
-$ vendor/bin/phpunit
+## you can migrate to sqlite for testing
+$ touch database.sqlite
+$ php artisan migrate --seed --env=testing
+
+## Run tests
+$ php artisan test
 
 ````
 
@@ -75,20 +83,19 @@ DOCKER_PHP_SERVICE=php-fpm
 DOCKER_PHP_SERVICE_PORT=9000
 DOCKER_DATABASE_SERVICE=database
 
-SERVER_NAME=product-rest-api.local
+SERVER_NAME={{SERVER_NAME}}
 
 ```php
 
 #set up app
 APPLICATION_ID={{APPLICATION_ID}}
-APP_NAME=RestFulAPI
-APP_ENV=local
+APP_NAME={{APP_NAME}}
+APP_ENV={{APP_ENV}}
 APP_KEY={{APP_KEY}}
 APP_DEBUG=true
 APP_URL=http://localhost
 ENABLE_DEBUGGING=true
 ENABLE_MEMCACHED=true
-DEBUG_IP_LIST={{DEBUG_IP_LIST}}
 
 # set up server email
 SMTP_HOST={{SMTP_HOST}}
@@ -105,7 +112,7 @@ DATABASE_USERNAME={{DATABASE_USERNAME}}
 DATABASE_PASSWORD={{DATABASE_PASSWORD}}
 
 # set up others
-LOG_CHANNEL=stack
+LOG_CHANNEL=daily
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file

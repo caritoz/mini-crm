@@ -30,7 +30,8 @@ RUN yes | pecl install xdebug \
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-RUN chmod +x /usr/local/bin/composer
+RUN chmod +x /usr/local/bin/composer \
+    && composer self-update --2
 
 ## Install git
 RUN apt-get update \
@@ -50,5 +51,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY php-entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+#RUN groupadd -r www-data && adduser www-data
+
 #COPY artisan.sh /usr/local/bin
 #RUN chmod +x /usr/local/bin/artisan.sh
+ONBUILD RUN chmod +x /var/www/html/suite/.env
+ONBUILD RUN chmod +x /var/www/html/suite/.env.testing
+
+RUN chown -R www-data:www-data /var/www/html

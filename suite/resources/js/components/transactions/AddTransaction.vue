@@ -12,6 +12,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Reference</label>
+                                <input type="text" class="form-control" name="amount" v-model="transaction.reference">
+                                <span class="help is-danger text-danger" v-if="errors.has('reference')" v-text="errors.get('reference')"></span>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Amount</label>
                                 <input type="text" class="form-control" name="amount" v-model="transaction.amount">
                                 <span class="help is-danger text-danger" v-if="errors.has('amount')" v-text="errors.get('amount')"></span>

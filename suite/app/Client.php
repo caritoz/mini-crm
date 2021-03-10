@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Transaction;
 
@@ -9,6 +10,7 @@ use App\Transaction;
  * Class Client
  * @package App
  *
+ * @property integer id
  * @property string first_name
  * @property string last_name
  * @property string full_name

@@ -128,7 +128,7 @@ const actions = {
     },
     editClient({commit}, client){
         commit('SET_CLEAR_ERRORS')
-        axios.get(`/auth/clients/${client.id}/edit`)
+        axios.get(`/auth/clients/${client.id}`)
             .then(response => {
                 // console.log(response.data);
                 if(response.status === 200)

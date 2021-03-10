@@ -17,6 +17,7 @@ $factory->define(Transaction::class, function(Faker $faker){
         'client_id' => function(){
             return factory(\App\Client::class)->create()->id;
         },
-        'amount'    => $faker->randomFloat(2, 3)
+        'reference' => $faker->regexify('[A-Za-z0-9]{24}'),
+        'amount'    => $faker->randomFloat(2, 3, 100)
     ];
 });

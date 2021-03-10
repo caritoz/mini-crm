@@ -33,7 +33,7 @@ Route::group(['prefix' => 'auth'], function () {
         Route::group(['prefix' => 'clients'], function () {
             Route::get('/', 'ClientController@index');
             Route::post('/',    'ClientController@store');
-            Route::get('/{id}/edit',  'ClientController@edit');
+            Route::get('/{id}',  'ClientController@show');
             Route::post('/{client}',  'ClientController@update');
             Route::delete('/{client}','ClientController@destroy');
         });

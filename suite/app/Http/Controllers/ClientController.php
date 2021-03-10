@@ -76,7 +76,7 @@ class ClientController extends Controller
      * @param \App\Client $client
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(Request $request, Client $client)
+    public function show(Request $request, Client $client)
     {
         try
         {

@@ -12,13 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property \DateTime created_at
  * @property \DateTime transaction_date
+ * @property string reference
  * @property float amount
  * @property integer client_id
  * @property Client client
  */
 class Transaction extends Model
 {
-    protected $fillable = ['client_id', 'amount'];
+    protected $fillable = ['client_id', 'reference', 'amount'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -48,6 +49,7 @@ class Transaction extends Model
     {
         return [
             'id'                => $this->id,
+            'reference'         => $this->reference,
             'transaction_date'  => $this->transaction_date,
             'full_name'         => $this->client->full_name,
             'amount'            => number_format($this->amount, 2)
