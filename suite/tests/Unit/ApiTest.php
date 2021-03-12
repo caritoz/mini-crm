@@ -26,8 +26,8 @@ class ApiTest extends TestCase
 
     public function test_relationships_are_defined()
     {
-        $this->assertInstanceOf(BelongsTo::class, (new \App\Transaction())->client());
-        $this->assertInstanceOf(HasMany::class, (new \App\Client())->transactions());
+        $this->assertInstanceOf(BelongsTo::class, (new \App\Models\Transaction())->client());
+        $this->assertInstanceOf(HasMany::class, (new \App\Models\Client())->transactions());
     }
 
     public function test_incorrect_credentials_is_not_accepted()
@@ -44,8 +44,8 @@ class ApiTest extends TestCase
     public function test_get_clients_with_credentials()
     {
         Passport::actingAs(
-            factory(\App\User::class)->create(),
-            ['check-status']
+            \App\Models\User::factory()->create(),
+            ['create-servers']
         );
 
         $response = $this->json( 'GET', '/api/auth/clients', [], $this->headers);

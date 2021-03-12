@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
 
@@ -20,7 +19,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        Artisan::call('migrate:refresh --seed');
+        Artisan::call('migrate:refresh');
 
         $this->headers = ['Content-Type' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'];
     }

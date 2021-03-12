@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+use App\Models\Client;
 use App\Http\Requests\ClientFormRequest;
 use App\Http\Requests\ClientUpdateFormRequest;
 use Illuminate\Http\Request;
@@ -73,7 +73,7 @@ class ClientController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Request $request
-     * @param \App\Client $client
+     * @param \App\Models\Client $client
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, Client $client)
@@ -94,7 +94,7 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param ClientUpdateFormRequest $request
-     * @param \App\Client $client
+     * @param \App\Models\Client $client
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(ClientUpdateFormRequest $request, Client $client)
@@ -124,7 +124,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Client $client)

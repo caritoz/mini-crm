@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class AutoCompleteSearchClientController extends Controller

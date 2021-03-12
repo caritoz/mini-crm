@@ -1,23 +1,31 @@
 <?php
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Models\Transaction;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-use App\Transaction;
-use Faker\Generator as Faker;
+class TransactionFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Transaction::class;
 
-// $factory->define(Transaction::class, function (Faker $faker) {
-//     return [
-//         'client_id' => factory(\App\Client::class),
-//         'amount'    => $faker->randomFloat(2, 3)
-//     ];
-// });
-
-$factory->define(Transaction::class, function(Faker $faker){
-    return [
-        'client_id' => function(){
-            return factory(\App\Client::class)->create()->id;
-        },
-        'reference' => $faker->regexify('[A-Za-z0-9]{24}'),
-        'amount'    => $faker->randomFloat(2, 3, 100)
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'client_id' => function(){
+                return \App\Models\User::factory()->make()->id;
+            },
+            'reference' => $this->faker->regexify('[A-Za-z0-9]{24}'),
+            'amount'    => $this->faker->randomFloat(2, 3, 100)
+        ];
+    }
+}

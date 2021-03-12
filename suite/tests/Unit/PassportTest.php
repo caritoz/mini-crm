@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\User;
+use App\Models\User;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Laravel\Passport\Client;
@@ -42,7 +42,7 @@ class PassportTest extends TestCase
             'updated_at' => new DateTime,
         ]);
 
-        $this->user = factory(User::class)->create();
+        $this->user = \App\Models\User::factory()->create();
 
         $token = $this->user->createToken('TestToken', $this->scopes)->accessToken;
 
@@ -53,7 +53,7 @@ class PassportTest extends TestCase
     public function test_can_i_create_a_passport_client()
     {
         Passport::actingAsClient(
-            factory(Client::class)->create(),
+            \App\Models\Client::factory()->create(),
             ['create-servers']
         );
 

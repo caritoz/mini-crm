@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+use App\Models\Client;
 use App\Http\Requests\TransactionFormRequest;
-use App\Transaction;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -86,7 +86,7 @@ class TransactionController extends Controller
      * Display the specified resource.
      *
      * @param Request $request
-     * @param \App\Transaction $transaction
+     * @param \App\Models\Transaction $transaction
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, Transaction $transaction)
@@ -108,7 +108,7 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(TransactionFormRequest $request, Transaction $transaction)
@@ -132,7 +132,7 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Transaction $transaction)

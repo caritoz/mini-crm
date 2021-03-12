@@ -2,23 +2,29 @@
 
 namespace Tests\Feature;
 
-use App\Client;
-use App\Transaction;
+use Database\Seeders\ClientSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class ClientTest extends TestCase
 {
-    use WithFaker, WithoutMiddleware;//, RefreshDatabase;
+    use WithFaker, WithoutMiddleware, RefreshDatabase;
 
-//    public function test_registered_clients_may_sign_in()
-//    {
-//        $this->load(function (Client $client, Client $client1, Client $client2, Client $client3){
-//            dump(func_get_args());
-//        });
-//    }
+    /**
+     * Run a specific seeder before each test.
+     *
+     * @var string
+     */
+    protected $seeder = ClientSeeder::class;
+
+    public function test_client_can_be_created_with_seeders_and_factories()
+    {
+        // Run a specific seeder...
+        $this->seed(ClientSeeder::class);
+        $this->assertTrue(true);
+    }
 
     public function test_can_create_client()
     {
@@ -29,7 +35,7 @@ class ClientTest extends TestCase
             'email'         => $this->faker->unique()->safeEmail,
         ];
 
-        $client = factory(Client::class)->create($request);
+        $client = \App\Models\Client::factory()->create($request);
 
         $this->assertTrue(true);
     }
@@ -43,9 +49,9 @@ class ClientTest extends TestCase
             'email'         => $this->faker->unique()->safeEmail,
         ];
 
-        $client = factory(Client::class)->create($request);
+        $client = \App\Models\Client::factory()->create($request);
 
-        $transaction = factory(Transaction::class)->create([
+        $transaction = \App\Models\Transaction::factory()->create([
             'client_id' => $client->id,
             'reference' => $this->faker->regexify('[A-Za-z0-9]{24}'),
             'amount'    => $this->faker->randomFloat(2, 3),
@@ -69,7 +75,7 @@ class ClientTest extends TestCase
             'email'         => $this->faker->unique()->safeEmail,
         ];
 
-        $client = factory(Client::class)->create($request);
+        $client = \App\Models\Client::factory()->create($request);
 
         $this->json( 'GET', "/api/auth/clients/{$client->id}", [], $this->headers)
                 ->assertJson([

@@ -1,10 +1,8 @@
 <?php
+namespace App\Models;
 
-namespace App;
-
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Transaction;
 
 /**
  * Class Client
@@ -22,6 +20,8 @@ use App\Transaction;
  */
 class Client extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['first_name', 'last_name', 'email', 'avatar'];
 
     /**
