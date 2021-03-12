@@ -1,14 +1,16 @@
 ## About
-Mini CRM, this project manages clients and their transactions.
+Mini CRM, this project manages a CRUD between clients and transactions.
 
 ## Requirements
 * [Docker](https://docs.docker.com/)
 * [Composer](http://getcomposer.org)
 * [Git](http://git-scm.com)
-* [PHP >= 7](http://php.net)
-* [Laravel 7 Support](https://laravel.com/docs/7.x)
+* [PHP >= 7.1](http://php.net)
+* [Laravel v8 Support](https://laravel.com/docs/8.x)
+* [PHPUnit v9](https://phpunit.readthedocs.io/en/9.5/index.html)
+* [BootstrapVue v2](https://bootstrap-vue.org/docs)
 * PHP Extensions:
-    - PHP >= 7.4
+    -  PHP >= 7.4
     -  BCMath PHP Extension
     -  Ctype PHP Extension
     -  Fileinfo PHP extension
