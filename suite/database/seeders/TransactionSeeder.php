@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Client;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class TransactionSeeder extends Seeder
     {
         Transaction::factory()
             ->count(3)
-            ->for(\App\Models\Client::factory()->create())
+            ->for(Client::factory())
             ->create();
     }
 }
