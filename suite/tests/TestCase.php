@@ -20,6 +20,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         Artisan::call('migrate:refresh');
+        Artisan::call('passport:install');
 
         $this->headers = ['Content-Type' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'];
     }

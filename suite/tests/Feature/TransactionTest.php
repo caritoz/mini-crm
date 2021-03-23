@@ -35,7 +35,7 @@ class TransactionTest extends TestCase
             ['check-status']
         );
 
-        $attributes = \App\Models\User::factory()->raw(['client_id' => null]);
+        $attributes = \App\Models\Client::factory()->raw(['client_id' => null]);
 
         $response = $this->json('POST','/api/auth/transactions', $attributes);
 

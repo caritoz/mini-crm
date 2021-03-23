@@ -13,17 +13,9 @@ class TransactionSeeder extends Seeder
      */
     public function run()
     {
-//        Transaction::create([
-//            'reference' => '59318212df40c0b77abd2afc',
-//            'amount'    => (float) 25.7,
-//            'client_id' => DB::table('clients')->where('email', 'john@example.net')->value('id')
-//        ]);
-
-        $client = \App\Models\Client::factory()->create();
-
-        $transactions = Transaction::factory()
+        Transaction::factory()
             ->count(3)
-            ->for($client)
+            ->for(\App\Models\Client::factory()->create())
             ->create();
     }
 }

@@ -22,7 +22,7 @@ class TransactionFactory extends Factory
     {
         return [
             'client_id' => function(){
-                return \App\Models\User::factory()->make()->id;
+                return \App\Models\Client::factory()->create()->id;
             },
             'reference' => $this->faker->regexify('[A-Za-z0-9]{24}'),
             'amount'    => $this->faker->randomFloat(2, 3, 100)
