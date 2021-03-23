@@ -9,7 +9,7 @@ on:
 jobs:
   laravel-tests:
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.operating-system }}
     defaults:
       run:
         working-directory: ./suite
@@ -21,7 +21,7 @@ jobs:
         dependency-version: [prefer-lowest, prefer-stable]
         include:
           -   laravel: 8.*
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+    name: PHP ${{ matrix.php-versions }} - Laravel v${{ matrix.laravel }} - ${{ matrix.dependency-version }} - Test on ${{ matrix.operating-system }}
 
     steps:
     - name: Checkout code
