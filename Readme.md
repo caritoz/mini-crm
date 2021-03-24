@@ -1,5 +1,6 @@
 ## About
-Mini CRM, this project manages a CRUD between clients and transactions.
+Mini CRM, this demo project which manages a CRUD between clients and transactions.
+It also contains [Github Actions](https://docs.github.com/en/actions/learn-github-actions) with a simple configuration for [CI/CD](https://en.wikipedia.org/wiki/CI/CD) in [run-tests.yml](https://github.com/caritoz/mini-crm/blob/master/.github/workflows/run-tests.yml).
 
 ## Requirements
 * [Docker](https://docs.docker.com/)
@@ -64,12 +65,12 @@ $ composer update
 ```
 ### PHPUnit tests in Laravel
 ````
-## you can migrate to sqlite for testing
+## you can migrate the database to sqlite db for testing
 $ touch database.sqlite
 $ php artisan migrate --seed --env=testing
 
 ## Run tests
-$ php artisan test
+$ ./vendor/bin/phpunit --testdox
 
 ````
 
