@@ -1,6 +1,5 @@
 ## About
-Mini CRM, this demo project which manages a CRUD between clients and transactions.
-It also contains [Github Actions](https://docs.github.com/en/actions/learn-github-actions) with a simple configuration for [CI/CD](https://en.wikipedia.org/wiki/CI/CD) in [run-tests.yml](https://github.com/caritoz/mini-crm/blob/master/.github/workflows/run-tests.yml).
+Mini CRM, this demo project manages a CRUD between clients and transactions. It also contains [Github Actions](https://docs.github.com/en/actions/learn-github-actions) with a simple configuration for [CI/CD](https://en.wikipedia.org/wiki/CI/CD) in [run-tests.yml](https://github.com/caritoz/mini-crm/blob/master/.github/workflows/run-tests.yml).
 
 ## Requirements
 * [Docker](https://docs.docker.com/)
